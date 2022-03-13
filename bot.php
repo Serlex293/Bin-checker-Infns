@@ -16,7 +16,7 @@ if($message == "/start"){
 }
 
 //Bin Lookup
-if(strpos($message, "!bin") === 0){
+if(strpos($message, ".bin") === 0){
     $bin = substr($message, 5);
     $curl = curl_init();
     curl_setopt_array($curl, [
@@ -50,13 +50,15 @@ $flag = $data['data']['countryInfo']['emoji'];
 
     if ($result1 == true) {
     send_message($chat_id,$message_id, "***✅ Valid BIN
-Bin: $bin
-Brand: $brand
-Level: $level
-Bank: $bank
-Country: $country $flag
-Type:$type
-Checked By @$username ***");
+┏━━━━━━━━━━━━━━━━━━
+┠⌬ BIN: $bin
+┠⌬ Brand: $brand
+┠⌬ Level: $level
+┠⌬ Bank: $bank
+┠⌬ Country: $country $flag
+┠⌬ Type:  $type
+┗━━━━━━━━━━━━━━━━━━
+〄  Checked By : @$username ***");
     }
 else {
     send_message($chat_id,$message_id, "***Enter Valid BIN***");
