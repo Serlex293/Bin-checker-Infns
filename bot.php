@@ -1,5 +1,5 @@
 <?php
-    date_default_timezone_set("Asia/kolkata");
+    date_default_timezone_set("America/Buenos_Aires");
     //Data From Webhook
     $content = file_get_contents("php://input");
     $update = json_decode($content, true);
@@ -16,7 +16,7 @@ if($message == "/start"){
 }
 
 //Bin Lookup
-if(strpos($message, "!bin") === 0){
+if(strpos($message, ".bin") === 0 ||(strpos($message, "!bin") === 0 ||(strpos($message, "/bin") === 0 ||(strpos($message, "bin") === 0){
     $bin = substr($message, 5);
     $curl = curl_init();
     curl_setopt_array($curl, [
@@ -45,20 +45,36 @@ if(strpos($message, "!bin") === 0){
  $brand = $data['data']['vendor'];
  $level = $data['data']['level'];
  $type = $data['data']['type'];
-$flag = $data['data']['countryInfo']['emoji'];
+ $flag = $data['data']['countryInfo']['emoji'];
  $result1 = $data['result'];
+
+            if (empty($level)) {
+            	$level = "UNAVAILABLE";
+            }
+
+            if (empty($typename)) {
+            	$typename = "UNAVAILABLE";
+            }
+            if (empty($brand)) {
+            	$brand = "UNAVAILABLE";
+            }
+            if (empty($bank)) {
+            	$bank = "UNAVAILABLE";
+            }
+            if (empty($bname)) {
+            	$bname = "UNAVAILABLE";
+            }
 
     if ($result1 == true) {
     send_message($chat_id,$message_id, "***✅ Valid BIN
 ┏━━━━━━━━━━━━━━━━━━
-┠⌬ BIN: $bin
+┠⌬ BIN: <code>$bin</code>
 ┠⌬ Brand: $brand
 ┠⌬ Level: $level
 ┠⌬ Bank: $bank
 ┠⌬ Country: $country $flag
 ┠⌬ Type:  $type
-┗━━━━━━━━━━━━━━━━━━
-〄  Checked By : @$username ***");
+┗━━━━━━━━━━━━━━━━━━***");
     }
 else {
     send_message($chat_id,$message_id, "***Enter Valid BIN***");
